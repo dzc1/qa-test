@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Link, Routes, NavLink } from "react-router-dom";
+import { routes } from "./routes/routes";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export const App = () => {
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <BrowserRouter>
+        <nav>
+          <ul className="app-ul">
+            <li className="app-li">
+              <Link to="/">Home</Link>
+            </li>
+            <li className="app-li">
+              {/* Wrong approach using the react router */}
+              <a href="/movies">Movies using a tag</a>
+            </li>
+            <li className="app-li">
+              <NavLink to="/movies">Movies</NavLink>
+            </li>
+            <li className="app-li">
+              <Link to="/my-info">My Info</Link>
+            </li>
+          </ul>
+        </nav>
 
-export default App
+        <main>
+          <Routes>{routes}</Routes>
+        </main>
+      </BrowserRouter>
+    </>
+  );
+};
